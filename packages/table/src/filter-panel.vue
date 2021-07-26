@@ -7,12 +7,15 @@
       v-show="showPopper">
       <div class="el-table-filter__content">
         <el-scrollbar wrap-class="el-table-filter__wrap">
-          <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
-            <el-checkbox
-              v-for="filter in filters"
-              :key="filter.value"
-              :label="filter.value">{{ filter.text }}</el-checkbox>
-          </el-checkbox-group>
+          <div>
+            <el-input v-model="filterKey" placeholder="请输入关键字"></el-input>
+            <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
+              <el-checkbox
+                v-for="filter in filters"
+                :key="filter.value"
+                :label="filter.value">{{ filter.text }}</el-checkbox>
+            </el-checkbox-group>
+          </div>
         </el-scrollbar>
       </div>
       <div class="el-table-filter__bottom">
@@ -43,14 +46,15 @@
 </template>
 
 <script type="text/babel">
-  import Popper from 'element-ui/src/utils/vue-popper';
-  import { PopupManager } from 'element-ui/src/utils/popup';
-  import Locale from 'element-ui/src/mixins/locale';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Popper from 'element-ui-xuebei/src/utils/vue-popper';
+  import { PopupManager } from 'element-ui-xuebei/src/utils/popup';
+  import Locale from 'element-ui-xuebei/src/mixins/locale';
+  import Clickoutside from 'element-ui-xuebei/src/utils/clickoutside';
   import Dropdown from './dropdown';
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import ElCheckbox from 'element-ui-xuebei/packages/checkbox';
+  import ElInput from 'element-ui-xuebei/packages/input';
+  import ElCheckboxGroup from 'element-ui-xuebei/packages/checkbox-group';
+  import ElScrollbar from 'element-ui-xuebei/packages/scrollbar';
 
   export default {
     name: 'ElTableFilterPanel',
@@ -64,7 +68,8 @@
     components: {
       ElCheckbox,
       ElCheckboxGroup,
-      ElScrollbar
+      ElScrollbar,
+      ElInput
     },
 
     props: {
@@ -75,6 +80,7 @@
     },
 
     methods: {
+  
       isActive(filter) {
         return filter.value === this.filterValue;
       },
@@ -121,13 +127,21 @@
       return {
         table: null,
         cell: null,
-        column: null
+        column: null,
+        filterKey: null
       };
     },
 
     computed: {
       filters() {
-        return this.column && this.column.filters;
+        if (this.filterKey) {
+          let filterList = this.column && this.column.filters;
+          return filterList.filter(item=>{
+            return item.text.indexOf(this.filterKey) >= 0;
+          });
+        } else {
+          return this.column && this.column.filters;
+        }
       },
 
       filterValue: {

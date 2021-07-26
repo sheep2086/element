@@ -29,6 +29,9 @@
         }">
       </table-header>
     </div>
+    <div class="el-table__header_actions-wrapper" v-if="extendBtns && extendBtns.length>0">
+      <el-button type="primary" size="mini" v-for="btn in extendBtns" @click="btn.action" v-text="btn.text"></el-button>
+    </div>
     <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
@@ -213,12 +216,12 @@
 </template>
 
 <script type="text/babel">
-  import ElCheckbox from 'element-ui/packages/checkbox';
+  import ElCheckbox from 'element-ui-xuebei/packages/checkbox';
   import { debounce, throttle } from 'throttle-debounce';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import Mousewheel from 'element-ui/src/directives/mousewheel';
-  import Locale from 'element-ui/src/mixins/locale';
-  import Migrating from 'element-ui/src/mixins/migrating';
+  import { addResizeListener, removeResizeListener } from 'element-ui-xuebei/src/utils/resize-event';
+  import Mousewheel from 'element-ui-xuebei/src/directives/mousewheel';
+  import Locale from 'element-ui-xuebei/src/mixins/locale';
+  import Migrating from 'element-ui-xuebei/src/mixins/migrating';
   import { createStore, mapStates } from './store/helper';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
@@ -244,7 +247,8 @@
           return [];
         }
       },
-
+      extendBtns: Array,
+  
       size: String,
 
       width: [String, Number],
@@ -688,7 +692,14 @@
         // 是否拥有多级表头
         isGroup: false,
         scrollPosition: 'left'
+        // extendBtns: [{text: '删除', action: ()=>{console.log('点击了按钮');}}]
       };
     }
   };
 </script>
+
+<style scoped>
+.el-table__header_actions-wrapper{
+  padding: 5px;
+}
+</style>
