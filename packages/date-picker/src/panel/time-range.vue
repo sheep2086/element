@@ -66,8 +66,8 @@
   import Locale from 'element-ui-xuebei/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
-  const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
-  const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
+  const MIN_TIME = parseDate('00:00', 'HH:mm'); // 学呗去掉:ss
+  const MAX_TIME = parseDate('23:59', 'HH:mm'); // 学呗去掉:ss
 
   const minTimeOfDay = function(date) {
     return modifyDate(MIN_TIME, date.getFullYear(), date.getMonth(), date.getDate());
@@ -118,7 +118,7 @@
         value: [],
         oldValue: [new Date(), new Date()],
         defaultValue: null,
-        format: 'HH:mm:ss',
+        format: 'HH:mm', // 学呗去掉:ss
         visible: false,
         selectionRange: [0, 2],
         arrowControl: false

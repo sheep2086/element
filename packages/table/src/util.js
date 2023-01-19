@@ -48,12 +48,17 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
     if (sortMethod) {
       return sortMethod(a.value, b.value);
     }
-    for (let i = 0, len = a.key.length; i < len; i++) {
-      if (a.key[i] < b.key[i]) {
-        return -1;
-      }
-      if (a.key[i] > b.key[i]) {
-        return 1;
+    // 学呗修改排序
+    if (typeof a.key === 'string' && typeof b.key === 'string') {
+      return a.key.localeCompare(b.key);
+    } else {
+      for (let i = 0, len = a.key.length; i < len; i++) {
+        if (a.key[i] < b.key[i]) {
+          return -1;
+        }
+        if (a.key[i] > b.key[i]) {
+          return 1;
+        }
       }
     }
     return 0;

@@ -290,7 +290,7 @@
         if (this.format) {
           return extractTimeFormat(this.format);
         } else {
-          return 'HH:mm:ss';
+          return 'HH:mm'; // 学呗去掉:ss
         }
       },
 
@@ -357,11 +357,11 @@
         this.timeUserInput.min = null;
         this.$nextTick(() => {
           if (this.$refs.maxTimePicker && this.maxDate && this.maxDate < this.minDate) {
-            const format = 'HH:mm:ss';
+            const format = 'HH:mm';
             this.$refs.maxTimePicker.selectableRange = [
               [
                 parseDate(formatDate(this.minDate, format), format),
-                parseDate('23:59:59', format)
+                parseDate('23:59', format)
               ]
             ];
           }

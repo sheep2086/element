@@ -86,7 +86,7 @@
     data() {
       return {
         popperClass: '',
-        format: 'HH:mm:ss',
+        format: 'HH:mm', // 学呗去掉:ss
         value: '',
         defaultValue: null,
         date: new Date(),

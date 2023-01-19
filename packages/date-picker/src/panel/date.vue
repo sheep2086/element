@@ -494,7 +494,7 @@
 
       checkDateWithinRange(date) {
         return this.selectableRange.length > 0
-          ? timeWithinRange(date, this.selectableRange, this.format || 'HH:mm:ss')
+          ? timeWithinRange(date, this.selectableRange, this.format || 'HH:mm') // 学呗去掉:ss
           : true;
       }
     },
@@ -581,7 +581,7 @@
         if (this.format) {
           return extractTimeFormat(this.format);
         } else {
-          return 'HH:mm:ss';
+          return 'HH:mm'; // 学呗去掉:ss
         }
       },
 
