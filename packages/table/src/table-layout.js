@@ -20,6 +20,7 @@ class TableLayout {
     this.tableHeight = null;
     this.headerHeight = 44; // Table Header Height
     this.appendHeight = 0; // Append Slot Height
+    this.addtopHeight = 0; // addtop Slot Height
     this.footerHeight = 44; // Table Footer Height
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
@@ -91,9 +92,9 @@ class TableLayout {
 
   updateElsHeight() {
     if (!this.table.$ready) return Vue.nextTick(() => this.updateElsHeight());
-    const { headerWrapper, appendWrapper, footerWrapper } = this.table.$refs;
+    const { headerWrapper, appendWrapper, footerWrapper, addtopWrapper } = this.table.$refs;
     this.appendHeight = appendWrapper ? appendWrapper.offsetHeight : 0;
-
+    this.addtopHeight = addtopWrapper ? addtopWrapper.offsetHeight : 0;
     if (this.showHeader && !headerWrapper) return;
 
     // fix issue (https://github.com/ElemeFE/element/pull/16956)

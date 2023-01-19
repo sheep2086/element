@@ -839,6 +839,7 @@
     tooltip-effect="dark"
     style="width: 100%"
     @selection-change="handleSelectionChange">
+    <div  slot="addtop" style="height:40px">xxxxxxxx</div>
     <el-table-column
       type="selection"
       width="55">
